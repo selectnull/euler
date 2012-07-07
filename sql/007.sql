@@ -1,0 +1,1 @@
+select max(prime) from primes(10001)

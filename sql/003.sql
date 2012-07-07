@@ -1,0 +1,1 @@
+select max(val) from prime_factors(600851475143)

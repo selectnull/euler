@@ -1,4 +1,9 @@
+*.sw[po]
 cs/bin/
 cs/*.userprefs
 cs/*.pidb
+
 *.pyc
+
+js/node_modules
+

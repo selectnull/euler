@@ -1,6 +1,8 @@
 #!/usr/bin/env node
 
-var _ = require('underscore')._;
+var _ = require('underscore')._,
+    path = require('path'),
+    fs = require('fs');
 
 var solve = function (module, fn) {
         return require('./' + module)[fn]();
@@ -12,10 +14,7 @@ var solve = function (module, fn) {
     },
 
     parseArguments = function (args) {
-        var result = {
-                problems: [],
-                checkSolution: true
-            },
+        var result = { problems: [] },
             i, arg,
             rx = /^(\d{1,3})(\.js)?(\:[\w]+)?$/,
             match, fn;
@@ -33,17 +32,27 @@ var solve = function (module, fn) {
                     fn = match[3].substring(1);
                 }
                 result.problems.push({ module: padZeroes(match[1], 3), fn: fn });
-            } else if (arg === '--nocheck') {
-                result.checkSolution = false;
             }
         }
         
         return result;
     },
+
+    checkSolution = function (problem) {
+        var i,
+            solutions = JSON.parse(fs.readFileSync(path.join(path.dirname(__dirname), 'problems.json')), 'utf-8');
+        problem = parseInt(problem, 10);
+        return _.find(solutions, function (p) { return p.problem === problem; }).solution;
+    },
+
     args = parseArguments(process.argv);
 
 var i, problem,
-    solutionTemplate = _.template("Solution to problem <%= problem %>: <%= solution %>"),
+    solutionTemplate = _.template(
+        "Solution to problem <%= problem %>: <%= solution %>" +
+        "<% if (solution === checkedSolution) print(' (ok)'); " + 
+        "else print(' (should be <%= checkedSolution %>)') %>"
+    ),
     context;
 
 for (i = 0; i < args.problems.length; i++ ) {
@@ -51,7 +60,8 @@ for (i = 0; i < args.problems.length; i++ ) {
     context = {
         "problem": problem.module,
         "using": problem.fn,
-        "solution": solve(problem.module, problem.fn)
+        "solution": solve(problem.module, problem.fn),
+        "checkedSolution": checkSolution(problem.module)
     }
 
     console.log(solutionTemplate(context));

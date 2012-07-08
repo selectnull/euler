@@ -1,10 +1,5 @@
-var _ = require('underscore')._;
-
-var _sum = function (list) {
-        return _.reduce(list, function(memo, num) {
-            return memo + num;
-        }, 0);
-    };
+var _ = require('underscore')._,
+    _sum = require('./utils')._sum;
 
 var solvePlain = function () {
     // this is a solution using plain javascript accumulator sytle

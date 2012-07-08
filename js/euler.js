@@ -42,7 +42,11 @@ var solve = function (module, fn) {
         var i,
             solutions = JSON.parse(fs.readFileSync(path.join(path.dirname(__dirname), 'problems.json')), 'utf-8');
         problem = parseInt(problem, 10);
-        return _.find(solutions, function (p) { return p.problem === problem; }).solution;
+        try {
+            return _.find(solutions, function (p) { return p.problem === problem; }).solution;
+        } catch (error) {
+            return null;
+        }
     },
 
     args = parseArguments(process.argv);

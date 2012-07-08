@@ -1,0 +1,9 @@
+{
+    "name": "euler-solutions",
+    "version": "0.0.1",
+    "descriptions": "My projecteuler.net solutions using Node.js",
+    "author": "Sasha Matijasic <sasha@selectnull.com> (http://selectnull.com/)",
+    "dependencies": {
+        "underscore": "1.3.3"
+    }
+}

@@ -1,6 +1,7 @@
 use std::env;
 
 mod p001;
+mod p006;
 
 fn about() {
     println!("projecteuler.net problems implemented in Rust");
@@ -9,8 +10,13 @@ fn about() {
 }
 
 fn solve_problem(n: i32) {
+    fn output(problem: i32, result: String) {
+        println!("Problem {}: {}", problem, result)
+    }
+
     match n {
-        1 => println!("Problem 1: {}", p001::solve()),
+        1 => output(n, p001::solve()),
+        6 => output(n, p006::solve()),
         _ => println!("Nope, you haven't solved problem {} yet.", n)
     }
 }

@@ -7,3 +7,4 @@ cs/*.pidb
 
 js/node_modules
 
+rust/target/

@@ -1,0 +1,5 @@
+[package]
+
+name = "euler"
+version = "0.0.1"
+authors = ["Sasha Matijasic <sasha@selectnull.com>"]

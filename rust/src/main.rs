@@ -1,7 +1,10 @@
 use std::env;
 
 mod p001;
+mod p003;
 mod p006;
+
+mod primes;
 
 fn about() {
     println!("projecteuler.net problems implemented in Rust");
@@ -16,6 +19,7 @@ fn solve_problem(n: i32) {
 
     match n {
         1 => output(n, p001::solve()),
+        3 => output(n, p003::solve()),
         6 => output(n, p006::solve()),
         _ => println!("Nope, you haven't solved problem {} yet.", n)
     }
